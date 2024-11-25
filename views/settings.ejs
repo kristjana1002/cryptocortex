@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Settings</title>
+    <link rel="stylesheet" href="/css/styles.css"> <!-- Link to your CSS file -->
+</head>
+<body>
+    <!-- Header -->
+    <%- include('partials/header') %>
+
+    <main class="settings-container">
+        <h1>Account Settings</h1>
+
+        <!-- Success/Error Messages -->
+        <div id="message-container"></div>
+
+        <!-- Account Update Form -->
+        <form id="settings-form" class="settings-form" method="POST" action="/settings">
+            <!-- Username Field -->
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" value="<%= user.username || '' %>" required>
+
+            <!-- Email Field -->
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" value="<%= user.email || '' %>" required>
+
+            <!-- Password Field -->
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="New Password (optional)">
+
+            <!-- Update Button -->
+            <button type="submit" id="update-button">Save Changes</button>
+        </form>
+
+        <!-- Logout Link -->
+        <a href="/logout" class="logout-link">Logout</a>
+    </main>
+
+    <!-- Footer -->
+    <%- include('partials/footer') %>
+
+    <!-- JavaScript for Form Handling -->
+    <script>
+        // Handle the form submission with AJAX (optional, if you prefer no page reload)
+        document.getElementById('settings-form').addEventListener('submit', function (e) {
+            e.preventDefault(); // Prevent default form submission (no page reload)
+
+            // Gather form data
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            // Simple Validation (username and email are required)
+            if (!username || !email) {
+                displayMessage('error', 'Username and email are required.');
+                return;
+            }
+
+            // Simulate API call or data handling
+            fetch('/settings', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username, email, password }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    displayMessage('success', 'Account updated successfully!');
+                } else {
+                    displayMessage('error', data.message || 'An error occurred.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                displayMessage('error', 'Failed to update account.');
+            });
+        });
+
+        // Function to display messages
+        function displayMessage(type, message) {
+            const container = document.getElementById('message-container');
+            container.innerHTML = `<div class="message ${type}">${message}</div>`;
+        }
+    </script>
+</body>
+</html>

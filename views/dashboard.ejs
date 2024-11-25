@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/header') %>
+    <title>CryptoCortex - Dashboard</title>
+</head>
+<body>
+<%- include('partials/header') %>
+    <div class="container">
+        <header class="dashboard-header">
+            <h1>Your Dashboard</h1>
+            <img src="https://via.placeholder.com/1200x300?text=Dashboard+Banner" alt="Dashboard Banner">
+        </header>
+        
+        <section class="dashboard">
+            <div class="overview">
+                <img src="https://via.placeholder.com/100x100?text=User+Avatar" alt="User Avatar">
+                <h2>Welcome, <%= user.username %>!</h2>
+                <p>Your current balance: <strong>$<%= user.balance %></strong></p>
+            </div>
+            
+            <div class="transaction-history">
+                <h3>Recent Transactions</h3>
+                <ul>
+                    <% transactions.forEach(transaction => { %>
+                        <li>
+                            <span><%= transaction.date %></span>
+                            <span><%= transaction.type %></span>
+                            <span>$<%= transaction.amount %></span>
+                        </li>
+                    <% }) %>
+                </ul>
+            </div>
+        </section>
+
+        <footer>
+            <%- include('./partials/footer') %>
+        </footer>
+    </div>
+</body>
+</html>

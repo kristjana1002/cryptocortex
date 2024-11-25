@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup - CryptoCortex</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<%- include('./partials/header') %>
+    <div class="signup-container">
+        <div class="form-box">
+            <h1>Join CryptoCortex</h1>
+            <p>The brain behind managing your digital coins and assets. Let’s get started!</p>
+            
+            <!-- Signup Form -->
+            <form action="/signup" method="POST">
+                <!-- Full Name -->
+                <label for="fullName">Full Name:</label>
+                <input type="text" id="fullName" name="fullName" placeholder="Your Full Name" required>
+                
+                <!-- Email -->
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" name="email" placeholder="Your Email Address" required>
+                
+                <!-- Username -->
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" placeholder="Choose a Username" required>
+                
+                <!-- Password -->
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" placeholder="Create a Password" required>
+                
+                <!-- Confirm Password -->
+                <label for="confirmPassword">Confirm Password:</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Re-enter Password" required>
+                
+                <!-- Submit Button -->
+                <button type="submit" class="btn">Sign Up</button>
+            </form>
+            
+            <!-- Existing User Link -->
+            <div class="form-footer">
+                <p>Already have an account? <a href="/login">Log in here</a>.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
